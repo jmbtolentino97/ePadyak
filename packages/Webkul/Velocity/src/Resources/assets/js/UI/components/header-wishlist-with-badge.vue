@@ -6,7 +6,11 @@
             <span class="badge" v-text="wishlistCount"></span>
         </div>
 
-        <span v-text="__('header.wishlist')" v-if="isText == 'true'"></span>
+        <span v-if="fetchingWishlists">Loading...</span>
+        <span
+            v-else-if="isText == 'true'"
+            v-text="__('header.wishlist')"
+        ></span>
     </a>
 </template>
 
@@ -16,7 +20,8 @@ export default {
 
     data: function() {
         return {
-            wishlistCount: 0
+            wishlistCount: 0,
+            fetchingWishlists: false
         };
     },
 
@@ -33,6 +38,7 @@ export default {
     methods: {
         updateHeaderItemsCount: function() {
             if (this.isCustomer == 'true') {
+                this.fetchingWishlists = true;
                 this.$http
                     .get(`${this.$root.baseUrl}/items-count`)
                     .then(response => {
@@ -41,7 +47,8 @@ export default {
                     })
                     .catch(exception => {
                         console.log(this.__('error.something_went_wrong'));
-                    });
+                    })
+                    .finally(() => this.fetchingWishlists = false);
             }
         }
     }

@@ -2,7 +2,7 @@
     <div :class="`dropdown ${cartItems.length > 0 ? '' : 'disable-active'}`">
         <mini-cart-button
             :item-count="cartItems.length"
-            :cart-text="cartText"
+            :cart-text="computedCartText"
         ></mini-cart-button>
 
         <div
@@ -120,7 +120,8 @@ export default {
     data: function() {
         return {
             cartItems: [],
-            cartInformation: []
+            cartInformation: [],
+            fetching: false
         };
     },
 
@@ -134,8 +135,19 @@ export default {
         }
     },
 
+    computed: {
+        computedCartText() {
+            if (this.fetching) {
+                return `Loading...`;
+            }
+
+            return this.cartText;
+        }
+    },
+
     methods: {
         getMiniCartDetails: function() {
+            this.fetching = true;
             this.$http
                 .get(`${this.$root.baseUrl}/mini-cart`)
                 .then(response => {
@@ -147,7 +159,8 @@ export default {
                 })
                 .catch(exception => {
                     console.log(this.__('error.something_went_wrong'));
-                });
+                })
+                .finally(() => this.fetching = false);
         },
 
         removeProduct: function(productId) {

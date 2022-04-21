@@ -26,9 +26,11 @@
                     <div
                         class="step-content shipping"
                         id="shipping-section"
-                        v-if="showShippingSection">
+                    >
 
+                        <span v-if="fetchingShippingMethods">Please wait...</span>
                         <shipping-section
+                        v-if="showShippingSection"
                             :key="shippingComponentKey"
                             @onShippingMethodSelected="shippingMethodSelected($event)">
                         </shipping-section>
@@ -84,6 +86,11 @@
                 </div>
 
                 <div class="col-lg-4 col-md-12 offset-lg-1 order-summary-container top pt0">
+                    <span
+                        v-if="fetchingOrderSummary"
+                    >
+                        Loading cart summary...
+                    </span>
                     <summary-section :key="summaryComponentKey"></summary-section>
 
                     <div class="paypal-button-container mt10"></div>
@@ -137,6 +144,8 @@
                         new_billing_address: false,
                         showShippingSection: false,
                         new_shipping_address: false,
+                        fetchingShippingMethods: false,
+                        fetchingOrderSummary: false,
                         selected_payment_method: '',
                         selected_shipping_method: '',
                         countries: [],
@@ -168,6 +177,7 @@
 
                     this.fetchCountryStates();
 
+                    this.fetchingOrderSummary = true;
                     this.getOrderSummary();
 
                     if (! customerAddress) {
@@ -370,6 +380,7 @@
                                 this.reviewComponentKey++;
                             })
                             .catch(function (error) {})
+                            .finally(() => this.fetchingOrderSummary = false);
                     },
 
                     saveAddress: async function () {
@@ -411,6 +422,7 @@
                             });
                         }
 
+                        this.fetchingShippingMethods = true;
                         this.$http.post("{{ route('shop.checkout.save-address') }}", this.address)
                             .then(response => {
                                 this.disable_button = false;
@@ -445,6 +457,7 @@
 
                                 this.handleErrorResponse(error.response, 'address-form')
                             })
+                            .finally(() => this.fetchingShippingMethods = false);
                     },
 
                     saveShipping: async function () {

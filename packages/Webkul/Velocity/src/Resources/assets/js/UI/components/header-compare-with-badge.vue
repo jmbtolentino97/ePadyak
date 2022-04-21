@@ -6,7 +6,11 @@
             <span class="badge" v-text="compareCount"></span>
         </div>
 
-        <span v-text="__('customer.compare.text')" v-if="isText == 'true'"></span>
+        <span v-if="fetchingCompareItems">Loading...</span>
+        <span
+            v-else-if="isText == 'true'"
+            v-text="__('customer.compare.text')"
+        ></span>
     </a>
 </template>
 
@@ -16,7 +20,8 @@ export default {
 
     data: function() {
         return {
-            compareCount: 0
+            compareCount: 0,
+            fetchingCompareItems: false
         };
     },
 
@@ -39,6 +44,7 @@ export default {
                     this.compareCount = comparedItems.length;
                 }
             } else {
+                this.fetchingCompareItems = true;
                 this.$http
                     .get(`${this.$root.baseUrl}/items-count`)
                     .then(response => {
@@ -46,7 +52,8 @@ export default {
                     })
                     .catch(exception => {
                         console.log(this.__('error.something_went_wrong'));
-                    });
+                    })
+                    .finally(() => this.fetchingCompareItems = false);
             }
         }
     }
