@@ -336,6 +336,18 @@ return [
             'forget-password-link-title' => 'Forget Password ?',
             'remember-me'                => 'Remember Me',
             'submit-btn-title'           => 'Sign In'
+        ],
+
+        'register' => [
+            'title'                      => 'Register',
+            'name'                       => 'Name',
+            'confirm-password'           => 'Confirm Password',
+            'role'                       => 'Role',
+            'existing-account'           => 'Already has an existing account ?',
+            'submit-btn-title'           => 'Register',
+            'dti'                        => 'DTI Certificate of Registration',
+            'tax-receipt'                => 'Occupational Tax Receipt or Professional Tax Receipt from City Hall or Municipal Hall',
+            'identification'             => 'Valid identification'
         ]
     ],
 

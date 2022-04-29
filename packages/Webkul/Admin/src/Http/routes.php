@@ -15,6 +15,14 @@ Route::group(['middleware' => ['web', 'admin_locale']], function () {
             'redirect' => 'admin.dashboard.index',
         ])->name('admin.session.store');
 
+        Route::get('/register', 'Webkul\User\Http\Controllers\RegisterController@index')->defaults('_config', [
+            'view' => 'admin::users.sessions.register',
+        ])->name('admin.register.index');
+
+        Route::post('/register', 'Webkul\User\Http\Controllers\RegisterController@store')->defaults('_config', [
+            'redirect' => 'admin.session.create',
+        ])->name('admin.register.store');
+
         // Forget Password Routes
         Route::get('/forget-password', 'Webkul\User\Http\Controllers\ForgetPasswordController@create')->defaults('_config', [
             'view' => 'admin::users.forget-password.create',
