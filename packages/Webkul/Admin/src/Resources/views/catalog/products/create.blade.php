@@ -56,9 +56,11 @@
                             <select class="control" v-validate="'required'" id="type" name="type" {{ $familyId ? 'disabled' : '' }} data-vv-as="&quot;{{ __('admin::app.catalog.products.product-type') }}&quot;">
 
                                 @foreach($productTypes as $key => $productType)
+                                    @if (in_array($productType['name'], array('Simple', 'Booking')))
                                     <option value="{{ $key }}" {{ request()->input('type') == $productType['key'] ? 'selected' : '' }}>
                                         {{ $productType['name'] }}
                                     </option>
+                                    @endif
                                 @endforeach
 
                             </select>
