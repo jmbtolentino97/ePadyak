@@ -32,8 +32,8 @@ class ExportController extends Controller
 
         $path = '\Webkul\Admin\DataGrids'.'\\'.last($gridName);
 
-        $gridInstance = new $path;
-        
+        $gridInstance = \App::make($path);
+
         $records = $gridInstance->export();
 
         if (! count($records)) {
