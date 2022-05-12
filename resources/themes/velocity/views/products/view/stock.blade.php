@@ -11,6 +11,10 @@
             @else
                 {{ __('shop::app.products.out-of-stock') }}
             @endif
+
+            @if ( $product->type === 'simple' )
+                ({{ $product->getTypeInstance()->totalQuantity() }})
+            @endif
     </button>
 </div>
 

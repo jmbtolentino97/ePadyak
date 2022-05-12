@@ -41,11 +41,11 @@
                 <input type="hidden" name="booking[type]" :value="booking.type"/>
 
                 <select v-validate="'required'" name="booking[type]" v-model="booking.type" class="control" data-vv-as="&quot;{{ __('bookingproduct::app.admin.catalog.products.booking-type') }}&quot;" :disabled="! is_new">
-                    <option value="default">{{ __('bookingproduct::app.admin.catalog.products.default') }}</option>
+                    <!--<option value="default">{{ __('bookingproduct::app.admin.catalog.products.default') }}</option>-->
                     <option value="appointment">{{ __('bookingproduct::app.admin.catalog.products.appointment-booking') }}</option>
-                    <option value="event">{{ __('bookingproduct::app.admin.catalog.products.event-booking') }}</option>
+                    <!--<option value="event">{{ __('bookingproduct::app.admin.catalog.products.event-booking') }}</option>
                     <option value="rental">{{ __('bookingproduct::app.admin.catalog.products.rental-booking') }}</option>
-                    <option value="table">{{ __('bookingproduct::app.admin.catalog.products.table-booking') }}</option>
+                    <option value="table">{{ __('bookingproduct::app.admin.catalog.products.table-booking') }}</option>-->
                 </select>
 
                 <span class="control-error" v-if="errors.has('booking[type]')">@{{ errors.first('booking[type]') }}</span>

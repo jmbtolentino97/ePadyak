@@ -335,7 +335,8 @@ return [
             'password'                   => 'Password',
             'forget-password-link-title' => 'Forget Password ?',
             'remember-me'                => 'Remember Me',
-            'submit-btn-title'           => 'Sign In'
+            'submit-btn-title'           => 'Sign In',
+            'register'                   => 'Don\'t have an account?'
         ],
 
         'register' => [

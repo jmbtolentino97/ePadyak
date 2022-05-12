@@ -31,7 +31,7 @@
 
                     <div class="control-group" :class="[errors.has('password') ? 'has-error' : '']">
                         <label for="password">{{ __('admin::app.users.sessions.password') }}</label>
-                        <input type="password" v-validate="'required|min:6'" class="control" id="password" name="password" data-vv-as="&quot;{{ __('admin::app.users.sessions.password') }}&quot;" value=""/>
+                        <input type="password" v-validate="'required|min:6|max:18'" class="control" id="password" name="password" ref="password" data-vv-as="&quot;{{ __('admin::app.users.sessions.password') }}&quot;" />
                         <span class="control-error" v-if="errors.has('password')">@{{ errors.first('password') }}</span>
                     </div>
 
@@ -49,24 +49,6 @@
                             @endforeach
                         </select>
                         <span class="control-error" v-if="errors.has('role_id')">@{{ errors.first('role_id') }}</span>
-                    </div>
-
-                    <div class="control-group" :class="[errors.has('dti') ? 'has-error' : '']">
-                        <label for="dti">{{ __('admin::app.users.register.dti') }}</label>
-                        <input type="file" v-validate="'required'" class="control" id="dti" name="dti" data-vv-as="&quot;{{ __('admin::app.users.register.dti') }}&quot;"/>
-                        <span class="control-error" v-if="errors.has('dti')">@{{ errors.first('dti') }}</span>
-                    </div>
-
-                    <div class="control-group" :class="[errors.has('tax_receipt') ? 'has-error' : '']">
-                        <label for="tax_receipt">{{ __('admin::app.users.register.tax-receipt') }}</label>
-                        <input type="file" v-validate="'required'" class="control" id="tax_receipt" name="tax_receipt" data-vv-as="&quot;{{ __('admin::app.users.register.tax-receipt') }}&quot;"/>
-                        <span class="control-error" v-if="errors.has('tax_receipt')">@{{ errors.first('tax_receipt') }}</span>
-                    </div>
-
-                    <div class="control-group" :class="[errors.has('identification') ? 'has-error' : '']">
-                        <label for="identification">{{ __('admin::app.users.register.identification') }}</label>
-                        <input type="file" v-validate="'required'" class="control" id="identification" name="identification" data-vv-as="&quot;{{ __('admin::app.users.register.identification') }}&quot;"/>
-                        <span class="control-error" v-if="errors.has('identification')">@{{ errors.first('identification') }}</span>
                     </div>
 
                     <div class="control-group">
